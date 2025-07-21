@@ -1,0 +1,19 @@
+flask                       # For the web API
+chromadb                    # Local vector database for retrieval
+sentence-transformers       # For text embedding (MiniLM-L6-v2)
+torch                       # Backend for sentence-transformers and LLMs
+Pillow                      # For image processing (cover/screenshot handling)
+uvicorn                     # For running the app with uv (fast ASGI server)
+transformers                # For running Qwen3-7B or other LLMs
+accelerate                  # (Optional) For faster LLM inference
+
+# EDA and prototyping
+ipython
+jupyter
+notebook
+pandas
+polars
+numpy
+matplotlib
+seaborn
+tqdm

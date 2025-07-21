@@ -205,3 +205,27 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ChromaDB local database files
+chroma/
+chromadb/
+*.db
+*.sqlite
+
+# Ignore large data/embedding files
+data/
+embeddings/
+
+# Jupyter Lab config
+.jupyter/
+
+# UI build artifacts
+ui/build/
+ui/dist/
+ui/node_modules/
+
+# Local virtualenv or tool-specific
+.game-env/
+
+# Logs
+logs/
