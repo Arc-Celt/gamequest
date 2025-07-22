@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import polars as pl
 import chromadb
-from chromadb.config import Settings
+from chromadb.config import Settings, DEFAULT_TENANT, DEFAULT_DATABASE
 from tqdm import tqdm
 from utils.logging_utils import setup_logging
 
@@ -16,9 +16,12 @@ screenshot_emb = pl.read_ndjson('embeddings/screenshot_embeddings.jsonl')
 critics_emb = pl.read_ndjson('embeddings/critics_embeddings.jsonl')
 
 # Initialize ChromaDB client with local storage
-client = chromadb.Client(Settings(
-    persist_directory="chroma_db"
-))
+client = chromadb.PersistentClient(
+    path="chroma_db",
+    settings=Settings(),
+    tenant=DEFAULT_TENANT,
+    database=DEFAULT_DATABASE,
+)
 
 # Create collections
 desc_collection = client.get_or_create_collection("desc_embeddings")
@@ -63,5 +66,4 @@ batch_add(cover_collection, cover_emb, 'cover_embedding', 'game_id', 'Covers')
 batch_add(screenshot_collection, screenshot_emb, 'screenshot_embedding', 'game_id', 'Screenshots')
 batch_add(critics_collection, critics_emb, 'embedding', 'review_id', 'Critics', is_critic=True)
 
-client.persist()
 print("All embeddings indexed!")

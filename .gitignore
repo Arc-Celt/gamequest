@@ -208,7 +208,7 @@ __marimo__/
 
 # ChromaDB local database files
 chroma/
-chromadb/
+chroma_db/
 *.db
 *.sqlite
 
