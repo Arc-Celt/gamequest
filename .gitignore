@@ -215,6 +215,7 @@ chroma_db/
 # Ignore large data/embedding files
 data/
 embeddings/
+models/
 
 # Jupyter Lab config
 .jupyter/
