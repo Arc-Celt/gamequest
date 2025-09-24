@@ -309,7 +309,7 @@ class ModelManager:
                     tokenizer=model_name,
                     torch_dtype=torch.float16 if device == "cuda" else torch.float32,
                     device=device,
-                    max_new_tokens=512,
+                    max_new_tokens=1024,
                     do_sample=True,
                     temperature=0.1,
                     top_p=0.9,
