@@ -27,7 +27,7 @@ DB_CONFIG = {
     'host': 'localhost',
     'database': 'gamequest',
     'user': 'postgres',
-    'password': 'ST5780@BCsp'
+    'password': os.environ.get('LOCAL_DB_PASSWORD', '')
 }
 
 # Setup logging

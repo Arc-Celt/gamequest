@@ -4,6 +4,7 @@ Final migration script to migrate local database to Neon PostgreSQL
 This includes the updated URLs and optimized schema
 """
 
+import os
 import psycopg2
 import sys
 from tqdm import tqdm
@@ -11,20 +12,20 @@ import time
 
 # Database configurations
 LOCAL_DB_CONFIG = {
-    'host': 'localhost',
-    'database': 'gamequest',
-    'user': 'postgres',
-    'password': 'ST5780@BCsp',
-    'port': 5432
+    'host': os.environ.get('LOCAL_DB_HOST', 'localhost'),
+    'database': os.environ.get('LOCAL_DB_NAME', 'gamequest'),
+    'user': os.environ.get('LOCAL_DB_USER', 'postgres'),
+    'password': os.environ.get('LOCAL_DB_PASSWORD', ''),
+    'port': int(os.environ.get('LOCAL_DB_PORT', 5432))
 }
 
 NEON_DB_CONFIG = {
-    'host': 'ep-purple-tooth-afn0imyh-pooler.c-2.us-west-2.aws.neon.tech',
-    'database': 'neondb',
-    'user': 'neondb_owner',
-    'password': 'npg_6H8mCAYSLhrQ',
-    'port': 5432,
-    'sslmode': 'require',
+    'host': os.environ.get('DB_HOST', 'localhost'),
+    'database': os.environ.get('DB_NAME', 'postgres'),
+    'user': os.environ.get('DB_USER', 'postgres'),
+    'password': os.environ.get('DB_PASSWORD', ''),
+    'port': int(os.environ.get('DB_PORT', 5432)),
+    'sslmode': os.environ.get('DB_SSLMODE', 'require'),
     'channel_binding': 'require'
 }
 

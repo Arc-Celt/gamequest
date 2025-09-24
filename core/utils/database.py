@@ -3,20 +3,24 @@
 Database connection and query utilities for GameQuest
 """
 
+import os
 import psycopg2
 from typing import List, Dict, Any, Optional, Tuple
 import logging
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
 # Database configuration
 DB_CONFIG = {
-    'host': 'ep-purple-tooth-afn0imyh-pooler.c-2.us-west-2.aws.neon.tech',
-    'database': 'neondb',
-    'user': 'neondb_owner',
-    'password': 'npg_6H8mCAYSLhrQ',
-    'port': 5432,
-    'sslmode': 'require'
+    'host': os.environ.get('DB_HOST', 'localhost'),
+    'database': os.environ.get('DB_NAME', 'postgres'),
+    'user': os.environ.get('DB_USER', 'postgres'),
+    'password': os.environ.get('DB_PASSWORD', ''),
+    'port': int(os.environ.get('DB_PORT', 5432)),
+    'sslmode': os.environ.get('DB_SSLMODE', 'disable')
 }
 
 def get_db_connection():

@@ -4,6 +4,7 @@ GameQuest Critics Migration Script
 Migrates critic reviews from JSONL to PostgreSQL
 """
 
+import os
 import json
 import psycopg2
 import psycopg2.extras
@@ -21,7 +22,7 @@ DB_CONFIG = {
     'host': 'localhost',
     'database': 'gamequest',
     'user': 'postgres',
-    'password': 'ST5780@BCsp'
+    'password': os.environ.get('LOCAL_DB_PASSWORD', '')
 }
 
 # Setup logging

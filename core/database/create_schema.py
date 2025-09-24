@@ -2,6 +2,8 @@
 """
 Create database schema for GameQuest
 """
+import os
+import sys
 import psycopg2
 import json
 from datetime import datetime
@@ -9,10 +11,10 @@ from datetime import datetime
 def get_db_connection():
     """Get database connection"""
     return psycopg2.connect(
-        host='localhost',
-        database='gamequest',
-        user='postgres',
-        password='ST5780@BCsp'
+        host=os.environ.get('LOCAL_DB_HOST', 'localhost'),
+        database=os.environ.get('LOCAL_DB_NAME', 'gamequest'),
+        user=os.environ.get('LOCAL_DB_USER', 'postgres'),
+        password=os.environ.get('LOCAL_DB_PASSWORD', '')
     )
 
 def create_schema():
@@ -58,7 +60,7 @@ def create_schema():
         """)
         print("✅ Created critics table")
         
-        # Create embeddings table (for future use, storing paths only)
+        # Create embeddings table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS embeddings (
                 id SERIAL PRIMARY KEY,
@@ -209,8 +211,3 @@ def test_schema():
 if __name__ == "__main__":
     create_schema()
     test_schema()
-    
-    print("\n🚀 Next steps:")
-    print("1. Load game metadata from G:\\Data\\images\\")
-    print("2. Migrate critics data")
-    print("3. Update your code to use PostgreSQL")

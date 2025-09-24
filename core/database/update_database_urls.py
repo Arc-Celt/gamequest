@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 """
 Update Local Database URLs from JSONL
-===================================
-
-This script reads the JSONL file and updates the sample_cover_url and 
-sample_screenshot_urls fields in your LOCAL database first.
-Then you can migrate everything to Aiven in one go!
 """
 
 import psycopg2
@@ -19,7 +14,7 @@ def get_local_db_config():
         'host': 'localhost',
         'database': 'gamequest',
         'user': 'postgres',
-        'password': 'ST5780@BCsp',
+        'password': os.environ.get('LOCAL_DB_PASSWORD', ''),
         'port': 5432
     }
 
