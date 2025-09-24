@@ -103,7 +103,7 @@ gamequest/
 - **SentenceTransformers**: `all-MiniLM-L6-v2` for text embeddings
 - **DINOv2**: `dinov2-base` for image embeddings
 - **Reranker**: `BAAI/bge-reranker-base` for result ranking
-- **LLM**: `Qwen3-4B` (cloud) / `qwen3:0.6b` (local)
+- **LLM**: `qwen3:0.6b` (for lightweight reasoning)
 
 ## Use Cases
 
