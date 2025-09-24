@@ -8,6 +8,8 @@ GameQuest is an intelligent game recommendation system that leverages multi-moda
 
 🚀 **Try GameQuest live**: [Hugging Face Spaces Demo](https://huggingface.co/spaces/celt313/agentic-rag-gamequest)
 
+<img width="800" alt="Image" src="https://github.com/user-attachments/assets/b03b1882-a379-4192-874b-82e34d79f947" />
+
 ## Features
 
 - **Advanced Filtering**: Platform, genre, score, year, and scored-only filters
