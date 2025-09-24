@@ -1,19 +1,28 @@
-flask                       # For the web API
-chromadb                    # Local vector database for retrieval
-sentence-transformers       # For text embedding (MiniLM-L6-v2)
-torch                       # Backend for sentence-transformers and LLMs
-Pillow                      # For image processing (cover/screenshot handling)
-uvicorn                     # For running the app with uv (fast ASGI server)
-transformers                # For running Qwen3-7B or other LLMs
-accelerate                  # (Optional) For faster LLM inference
+# Web Framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+Werkzeug==3.0.1
 
-# EDA and prototyping
-ipython
-jupyter
-notebook
-pandas
-polars
-numpy
-matplotlib
-seaborn
-tqdm
+# Database
+psycopg2-binary==2.9.9
+
+# Vector Database
+chromadb==0.4.24
+
+# Machine Learning
+torch==2.1.2
+torchvision==0.16.2
+sentence-transformers==2.2.2
+transformers==4.36.2
+Pillow==10.1.0
+
+# Utilities
+numpy==1.24.3
+pandas==2.1.4
+python-dotenv==1.0.0
+gunicorn==21.2.0
+
+# Development
+pytest==7.4.3
+black==23.11.0
+flake8==6.1.0

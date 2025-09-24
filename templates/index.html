@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎮 GameQuest - Intelligent Game Discovery</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎮 GameQuest</h1>
+        <p>
+          Discover amazing games with AI-powerd search and Agentic RAG
+          recommendations
+        </p>
+      </div>
+
+      <!-- Simple Instructions -->
+      <div class="simple-instructions">
+        <div class="instruction-notes">
+          <span
+            >🎯 <strong>Filters:</strong> Refine by platform, genre, score,
+            year</span
+          >
+          <span
+            >🔍 <strong>Text Search:</strong> Search by title or
+            description</span
+          >
+          <span
+            >🧠 <strong>Vector Search:</strong> Find similar themes and
+            styles</span
+          >
+          <span
+            >🤖 <strong>Agentic RAG:</strong> Context-aware
+            recommendations</span
+          >
+          <span
+            >🖼️ <strong>Cover Search:</strong> Upload image for similar
+            covers</span
+          >
+          <span
+            >📸 <strong>Screenshot Search:</strong> Upload image for similar
+            gameplay</span
+          >
+        </div>
+      </div>
+
+      <div class="search-section">
+        <div class="search-box">
+          <!-- Common Filters -->
+          <div class="filters-section">
+            <div class="filter-row">
+              <select id="platformFilter" class="filter-select">
+                <option value="">All Platforms</option>
+              </select>
+              <select id="genreFilter" class="filter-select">
+                <option value="">All Genres</option>
+              </select>
+              <select id="scoreFilter" class="filter-select">
+                <option value="">All Scores</option>
+                <option value="9">9+</option>
+                <option value="8">8+</option>
+                <option value="7">7+</option>
+                <option value="6">6+</option>
+                <option value="5">5+</option>
+                <option value="4">4+</option>
+                <option value="3">3+</option>
+                <option value="2">2+</option>
+                <option value="1">1+</option>
+              </select>
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="scoredOnlyFilter"
+                  class="checkbox-input"
+                />
+                <span class="checkbox-text">Only show scored games</span>
+              </label>
+              <input
+                type="number"
+                id="yearFilter"
+                placeholder="Year (e.g., 2020)"
+                class="filter-input"
+                min="1970"
+                max="2025"
+              />
+            </div>
+          </div>
+
+          <!-- Search Types -->
+          <div class="search-types">
+            <!-- Text-Based Search -->
+            <div class="search-section-card">
+              <div class="text-search-section">
+                <h3>Description Search</h3>
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search for games... (e.g., 'adventure games with dragons', 'cute cat games')"
+                  class="search-input"
+                />
+                <div class="text-search-buttons">
+                  <button onclick="searchGames()" class="btn btn-primary">
+                    Text Search
+                  </button>
+                  <button
+                    onclick="semanticSearchGames()"
+                    class="btn btn-primary"
+                  >
+                    Vector Search
+                  </button>
+                  <button onclick="agenticRAGSearch()" class="btn btn-agent">
+                    AI Agent
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visual Search -->
+            <div class="search-section-card">
+              <div class="visual-search-section">
+                <h3>Visual Search</h3>
+                <div class="visual-search-buttons">
+                  <button
+                    onclick="openImageUploadModal('covers')"
+                    class="btn btn-secondary"
+                  >
+                    Cover Search
+                  </button>
+                  <button
+                    onclick="openImageUploadModal('screenshots')"
+                    class="btn btn-secondary"
+                  >
+                    Screenshot Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-section" id="resultsSection">
+        <div class="loading">
+          <p>
+            🎮 Ready to discover amazing games! Use the search above to get
+            started.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Detail Modal -->
+    <div class="modal-overlay" id="gameModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Game Details</h3>
+          <button class="modal-close" onclick="closeGameDetails()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Content will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div class="modal-overlay" id="imageUploadModal">
+      <div class="modal-content image-upload-modal">
+        <div class="modal-header">
+          <h3 id="imageUploadTitle">Upload Image for Search</h3>
+          <button class="modal-close" onclick="closeImageUploadModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="image-upload-area" id="imageUploadArea">
+            <div class="upload-icon">📸</div>
+            <p>Drag and drop an image here, or click to select</p>
+            <input
+              type="file"
+              id="imageFileInput"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <div
+            class="image-preview-container"
+            id="imagePreviewContainer"
+            style="display: none"
+          >
+            <h4>Selected Image:</h4>
+            <img
+              id="imagePreview"
+              alt="Preview"
+              style="max-width: 300px; max-height: 300px; border-radius: 8px"
+            />
+            <div class="upload-actions">
+              <button class="btn btn-secondary" onclick="resetImageUpload()">
+                Choose Different Image
+              </button>
+              <button
+                class="btn btn-primary"
+                id="searchImageBtn"
+                onclick="searchByUploadedImage()"
+              >
+                Find Similar Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
