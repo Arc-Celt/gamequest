@@ -4,6 +4,10 @@
 
 GameQuest is an intelligent game recommendation system that leverages multi-modal vector search and Agentic RAG technologies to help users discover their next favorite game. The system integrates multiple AI models including SentenceTransformers for semantic search, DINOv2 for visual similarity, and Qwen3 LLM for intelligent reasoning, providing both traditional filtering and advanced AI-powered recommendations with detailed explanations.
 
+## Live Demo
+
+🚀 **Try GameQuest live**: [Hugging Face Spaces Demo](https://huggingface.co/spaces/celt313/agentic-rag-gamequest)
+
 ## Features
 
 - **Advanced Filtering**: Platform, genre, score, year, and scored-only filters
@@ -48,10 +52,6 @@ gamequest/
 ├── requirements.txt    # Python dependencies
 └── README.md
 ```
-
-## Live Demo
-
-🚀 **Try GameQuest live**: [Hugging Face Spaces Demo](https://huggingface.co/spaces/celt313/agentic-rag-gamequest)
 
 ## Search Capabilities
 
